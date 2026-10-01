@@ -7,16 +7,23 @@ fn validate_equation(args: &Vec<&str>) -> Result<(), String> {
         ))
     }
 
-    for (index, &piece) in args.iter().enumerate() {
+    for (index, &value) in args.iter().enumerate() {
         if index % 2 == 0 {
-            if piece.parse::<f64>().is_err() {
-                return Err(format!("`{}` is not a valid number.", piece))
+            if value.parse::<f64>().is_err() {
+                return Err(format!("`{}` is not a valid number.", value))
             }
         }
-        else if !matches!(piece, "+" | "-" | "/" | "*" | "%") {
-            return Err(format!("`{}` is not a valid operator.", piece))
+        else if !matches!(value, "+" | "-" | "/" | "*" | "%") {
+            return Err(format!("`{}` is not a valid operator.", value))
         }
     }
+
+    Ok(())
+}
+
+fn split_equation(args: &Vec<&str>) -> Result<(), String> {
+
+
 
     Ok(())
 }
