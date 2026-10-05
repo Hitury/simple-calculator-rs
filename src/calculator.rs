@@ -1,5 +1,6 @@
 use std::io;
 
+// Ensure correct input types and equation structure
 fn validate_equation(args: &Vec<&str>) -> Result<(), String> {
     if args.is_empty() || args.len() % 2 == 0 {
         return Err(
@@ -9,6 +10,7 @@ fn validate_equation(args: &Vec<&str>) -> Result<(), String> {
 
     for (index, &value) in args.iter().enumerate() {
         if index % 2 == 0 {
+            // Parse value as a 64bit float, return Error upon failure.
             if value.parse::<f64>().is_err() {
                 return Err(format!("`{}` is not a valid number.", value));
             }
@@ -41,6 +43,7 @@ fn evaluate_expression(numbers: &[f64], operators: &[char]) -> f64 {
     let mut nums = numbers.to_vec();
     let mut ops = operators.to_vec();
     
+   // Match input based on operator type 
     let mut i = 0;
     while i < ops.len() {
         match ops[i] {
@@ -64,7 +67,7 @@ fn evaluate_expression(numbers: &[f64], operators: &[char]) -> f64 {
         match op {
             '+' => result += nums[i + 1],
             '-' => result -= nums[i + 1],
-            _ => {} // This shouldn't happen due to validation
+            _ => {}
         }
     }  
     result
